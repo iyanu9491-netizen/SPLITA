@@ -1,0 +1,199 @@
+openapi: 3.0.0
+info:
+  title: documentation for splita user
+  version: 1.0.0
+  description: splita for user
+paths:
+  /api/v1/user:
+    post:
+      summary:  this end point is to create a user
+      tags: [users]
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type:  object
+              required:
+                - email
+                - fullname
+              properties: 
+                fullname:
+                  type: String
+                  example: michael
+                email:
+                  type: String
+                  example: iyanu9491@gmail.com
+                phoneNumber:
+                  type: String,
+                  example: 08132036362
+                password:
+                  type: String,
+                  example: Fanny.100
+      responses:
+       '201':
+          description: User succesfully Created ! 
+
+
+      
+  /api/v1/login:
+    post:
+      summary:  this end point is to login a user
+      tags: [Login]
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type:  object
+              required:
+                - email
+                - password
+              properties: 
+                email:
+                  type: String
+                  example: iyanu9491@gmail.com
+                password:
+                  type: String,
+                  example: Fanny.100
+      responses:
+       '201':
+          description: Login Successful !               
+
+
+/api/v1/user/check:
+    post:
+      summary:  this end point is to verify a user
+      tags: [verify-User]
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type:  object
+              required:
+                - email
+                - otp
+              properties: 
+                email:
+                  type: String
+                  example: iyanu9491@gmail.com
+                otp:
+                  type: String,
+                  example: 174668
+      responses:
+       '201':
+          description: User verify Successfully !      
+
+
+/api/v1/forgot-password:
+    post:
+      summary:  this end point is for a user to do forgot password 
+      tags: [forgot-password]
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type:  object
+              required:
+                - email
+              properties: 
+                email:
+                  type: String
+                  example: iyanu9491@gmail.com
+      responses:
+       '201':
+          description: Forgot Password successfully !               
+   
+   
+/api/v1/reset-password:
+    post:
+      summary:  this end point is to reset a user password
+      tags: [reset-password]
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type:  object
+              required:
+                - otp
+                - password
+                - email
+              properties: 
+                otp:
+                  type: String
+                  example: 097345
+                password:
+                  type: String,
+                  example: Fanny.100
+                email:
+                  type: String
+                  example: iyanu9491@gmail.com  
+                confirmPassword:
+                  type: String
+                  example: Fanny.100
+      responses:
+       '201':
+          description: Password reset successfully !      
+
+/api/v1/change-password:
+    post:
+      summary:  this end point is to change a user password
+      tags: [change-password]
+      security:
+        - bearerAuth: []
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type:  object
+              required:
+                - oldPassword
+                - newPassword
+                - confirmPassword
+              properties: 
+                oldPassword:
+                  type: String
+                  example: Wendy2001
+                newPassword:
+                  type: String,
+                  example: Fanny@00
+                confirmPassword:
+                  type: String,
+                  example: Fanny@00  
+      responses:
+       '201':
+          description: Password chnaged Succesfully !      
+
+/api/v1/update/{id}:
+    put:
+      summary:  this end point is to update a user picture
+      parameters:
+        - in: path
+          name: id
+      tags: [update-users]
+      requestBody: 
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type:  object
+              required:
+                - bankName
+                - accountNumber
+                - profilePicture
+              properties: 
+                bankName:
+                  type: string
+                accountNumber:
+                  type: string
+                profilePicture:
+                  type: string
+                  format: binary 
+      responses:
+       '201':
+          description: User is updated Successfully !      
+

@@ -1,0 +1,73 @@
+openapi: 3.0.0
+info:
+  title: documentation for splita group
+  version: 1.0.0
+  description: splita for group
+paths:
+  /api/v1/group:
+    post:
+      summary: this end point is to create a group
+      tags: [groups]
+      security:
+        - bearerAuth: []
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - groupName
+                - contributionAmount
+                - contributionFrequency,
+                - payoutFrequency,
+                - describeGroup,
+                - totalMembers
+              properties: 
+                groupName:
+                  type: string
+                  example: michael
+                contributionAmount:
+                  type: string
+                  example: 4000
+                contributionFrequency:
+                  type: string
+                  enum: [daily, weekly, monthly]
+                  example: daily
+                payoutFrequency:
+                  type: string
+                  enum: [daily, weekly, monthly]  
+                  example: weekly
+                describeGroup:
+                  type: string
+                  example: 4000 pack 7m
+                totalMembers: 
+                  type: number 
+      responses:
+       '201':
+          description: Group succesfully Created ! 
+
+
+    get:
+      summary: this is to get all groups
+      tags: [groups]
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Gotten all group succesfully       
+
+
+/api/v1/oneGroup/{id}:
+    get:
+      summary: This endpoint is to get one group
+      parameters:
+        - in: path
+          name: id
+      tags: [one-group]
+      security:
+        - bearerAuth: []
+      
+      responses: 
+        "201":
+          description: group found succesfully !
